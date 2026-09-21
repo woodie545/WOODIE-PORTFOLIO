@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+ @keyframes glitchSliceA {
+          0%   { clip-path: inset(8% 0 82% 0);  transform: translate3d(0,0,0); }
+          20%  { clip-path: inset(42% 0 30% 0); transform: translate3d(-2.5%,0,0); }
+          40%  { clip-path: inset(70% 0 5% 0);  transform: translate3d(2%,0,0); }
+          60%  { clip-path: inset(15% 0 60% 0); transform: translate3d(-1.5%,0,0); }
+          80%  { clip-path: inset(55% 0 20% 0); transform: translate3d(2.5%,0,0); }
+          100% { clip-path: inset(8% 0 82% 0);  transform: translate3d(0,0,0); }
+        }
+        @keyframes glitchSliceB {
+          0%   { clip-path: inset(60% 0 10% 0); transform: translate3d(0,0,0); }
+          25%  { clip-path: inset(20% 0 65% 0); transform: translate3d(3%,0,0); }
+          50%  { clip-path: inset(5% 0 85% 0);  transform: translate3d(-2%,0,0); }
+          75%  { clip-path: inset(45% 0 25% 0); transform: translate3d(1.5%,0,0); }
+          100% { clip-path: inset(60% 0 10% 0); transform: translate3d(0,0,0); }
+        }
+        @keyframes rgbSplitCyan {
+          0%, 100% { transform: translate3d(0,0,0); opacity: 0; }
+          15%  { transform: translate3d(-6px,1px,0); opacity: .85; }
+          40%  { transform: translate3d(4px,-1px,0); opacity: .6; }
+          65%  { transform: translate3d(-3px,0,0); opacity: .8; }
+        }
+        @keyframes rgbSplitMagenta {
+          0%, 100% { transform: translate3d(0,0,0); opacity: 0; }
+          15%  { transform: translate3d(6px,-1px,0); opacity: .85; }
+          40%  { transform: translate3d(-4px,1px,0); opacity: .6; }
+          65%  { transform: translate3d(3px,0,0); opacity: .8; }
+        }
+        @keyframes flicker {
+          0%, 19%, 21%, 100% { opacity: 1; }
+          20% { opacity: .4; }
+        }
+        .glitch-slice-a { animation: glitchSliceA 480ms steps(2, end); }
+        .glitch-slice-b { animation: glitchSliceB 480ms steps(2, end); }
+        .glitch-cyan    { animation: rgbSplitCyan 480ms linear; }
+        .glitch-magenta { animation: rgbSplitMagenta 480ms linear; }
+        .glitch-flicker { animation: flicker 480ms linear; }
+
+body {
+    @apply bg-[#0B0E13] text-white overflow-x-hidden ;
+}
+
+
+#navLink::before{
+    /* @apply content-[''] absolute w-full h-[2px] bg-blue-600 -bottom-[5px] left-0 scale-x-0 transition-transform ease-in-out origin-right duration-500 */
+}
+
+#navLink:hover::before{
+    @apply scale-x-100 origin-left
+}
+
+.DpBtn span{
+  @apply border rounded-sm mr-2 px-2 py-1 text-sm border-gray-500;
+}
+
+.DpBtn{
+  @apply my-4;
+}
+
+.filter button{
+  @apply border mr-5 py-1 px-3 my-8 rounded-md border-gray-700 ;
+}
