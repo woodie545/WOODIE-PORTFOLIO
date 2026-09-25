@@ -7,7 +7,7 @@ const madeForTheMove = {
   tagline: 'Wherever You Go. Keep Moving.',
   description:
     'A cinematic sneaker advertisement following a runner through constantly changing environments — from city streets and rain-soaked asphalt to desert landscapes and a futuristic city — while the sneaker remains unchanged.',
-  cover: '/Made for the MOVE-Cover.jpg',
+  cover: '/made-for-the-move-cover.jpg',
   links: { video: 'https://www.youtube.com/embed/NjoYhIMXkbc' },
   meta: { role: 'Creative Director · AI Animator · Video Editor', year: 2026, status: 'Completed' },
   tags: ['AI', 'Capcut', '3D', 'VideoEditing'],
