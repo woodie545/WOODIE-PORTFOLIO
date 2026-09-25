@@ -11,6 +11,7 @@ import TestimonialSlider from './TestimonialSlider'
 import { supabase } from '../lib/supabaseClient'
 import { DEFAULT_AVATAR } from '../lib/constants'
 import { NavLink, Router } from 'react-router-dom'
+import { projects } from '../../data/projects'
 
 export default function Home() {
   const [reviews, setReviews] = useState([])
@@ -238,59 +239,26 @@ export default function Home() {
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-4 gap-4'>
-          <DisplayPanel
-            img={'/cleanAbia.png'}
-            title={'CleanAbia'}
-            style={'text-green-600 hover:text-green-700'}
-            subTitle={'Civic Tech/Environmental Platform'}
-            content={
-              'A platform that empowers residents to report waste, track sanitation efforts and earn rewards for a cleaner Aba.'
-            }
-            button={
-              <div className='DpBtn flex flex-wrap gap-2'>
-                <span>React</span>
-                <span>TailwindCss</span>
-                <span>Maps Api</span>
-                <span>NodeJs</span>
-              </div>
-            }
-          />
+          {/* Featured only — Works-only projects set `featured: false` in their data file */}
+          {projects.filter((project) => project.featured !== false).map((project) => (
+            <DisplayPanel
+              key={project.slug}
+              img={project.cover}
+              title={project.title}
+              style={project.accent}
+              subTitle={project.tagline}
+              content={project.description}
+              linkTo={`/work/${project.slug}`}
+              button={
+                <div className='DpBtn flex flex-wrap gap-2'>
+                  {project.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              }
+            />
+          ))}
 
-          <DisplayPanel
-            img={'/databot.png'}
-            title={'Woodie Databot'}
-            style={'text-blue-600 hover:text-blue-700'}
-            subTitle={'WhatsApp Commerce Bot'}
-            content={
-              'An intelligent WhatsApp bot for airtime & data sales with AI automation, referrals, and seamless payment integration.'
-            }
-            button={
-              <div className='DpBtn flex flex-wrap gap-2'>
-                <span>Node.js</span>
-                <span>MongoDB</span>
-                <span>Gemini AI</span>
-                <span>Railway</span>
-              </div>
-            }
-          />
-
-          <DisplayPanel
-            img={'/MAde for the MOVE-Cover.jpg'}
-            title={'Made for the Move'}
-            style={'text-amber-600 hover:text-amber-700'}
-            subTitle={'Cinematic AI Product Advertisement'}
-            content={
-              'A cinematic sneaker advertisement that follows one runner through constantly changing worlds — while the sneaker remains built for every move.'
-            }
-            button={
-              <div className='DpBtn flex flex-wrap gap-2'>
-                <span>AI</span>
-                <span>Capcut</span>
-                <span>3D</span>
-                <span>VideoEditing</span>
-              </div>
-            }
-          />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function DisplayPanel({title, subTitle, content, button, img, style}) {
+export default function DisplayPanel({title, subTitle, content, button, img, style, linkTo}) {
   return (
     <div className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
 
@@ -18,7 +19,11 @@ export default function DisplayPanel({title, subTitle, content, button, img, sty
                     {button}
                 </div>
 
-                <button className={`${style} font-semibold my-1`}>Explore →</button>
+                {linkTo ? (
+                  <Link to={linkTo} className={`${style} font-semibold my-1 inline-block`}>Explore →</Link>
+                ) : (
+                  <button className={`${style} font-semibold my-1`}>Explore →</button>
+                )}
             </div>
         </div>
     </div>

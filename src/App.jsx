@@ -10,6 +10,7 @@ import About from './components/pages/About'
 import Process from './components/pages/Process'
 import StartProject from './components/pages/StartProject'
 import ServiceDetail from './components/pages/ServiceDetail'
+import ProjectCaseStudy from './components/pages/ProjectCaseStudy'
 import NotFound from './components/pages/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
@@ -34,6 +35,10 @@ function App() {
     {
       path:"/work",
       element:<Work/>
+    },
+    {
+      path:"/work/:slug",
+      element:<ProjectCaseStudy/>
     },
     {
       path:"/about",

@@ -1,8 +1,42 @@
-import React, { useState } from 'react'
-import { filter, work } from '../mapings'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { filter } from '../mapings'
+import { projects } from '../../data/projects'
+
+function ProjectCard({ project }) {
+  return (
+    <div className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
+
+      <img src={project.cover} alt={project.title} className='w-full h-auto rounded-lg' />
+
+      <div className='p-3'>
+        <div>
+          <h1 className='font-bold'>{project.title}</h1>
+          <h3 className='text-[16px]'>{project.tagline}</h3>
+        </div>
+        <p className='text-gray-600 text-sm my-1'>{project.description}</p>
+
+        <div>
+          <div>
+            <div className='DpBtn flex flex-wrap gap-1'>
+              {project.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <Link to={`/work/${project.slug}`} className={`${project.accent} font-semibold my-1 inline-block`}>Explore →</Link>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Work() {
   const [active, setActive] = useState('All')
+
+  const categories = filter.filter((cat) => cat !== 'All')
+  const visibleCategories = active === 'All' ? categories : [active]
 
   return (
     <div className='px-7'>
@@ -12,9 +46,9 @@ export default function Work() {
             <div>
               <img src="/tech idea board.png" alt="" className="" />
               <div className="absolute inset-0 bg-linear-to-b from-[#0b0e13c3] to-[#0b0e13e8]" />
-              
+
               <div className="absolute inset-0 flex flex-col items-center justify-center max-w-xl text-center mx-auto px-6 py-16">
-              
+
               <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-5">
                 <span className='text-blue-600'>IDEAS</span> WE'VE TURNED INTO <span className="text-green-500">REALITY</span>.
               </h1>
@@ -47,12 +81,12 @@ export default function Work() {
                 <p className="text-slate-400 text-sm mt-1">Imagine. Create. Build.</p>
               </div> */}
             </div>
-      
+
       {/* filter */}
       <div className='filter flex'>
         {
           filter.map((cat, index) => (
-            
+
               <button
               key={index}
               onClick={() => setActive(cat)}
@@ -62,190 +96,28 @@ export default function Work() {
               }>
                 {cat}
               </button>
-            
+
           ))
         }
       </div>
 
     <div>
-        {/* WEB */}
-        <div className={`${active === "Web" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-          <h1 className='text-xl font-bold mb-5'>WEB</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "Web").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-
-        {/* Automation */}
-        <div className={`${active === "Automation" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-         <h1 className='text-xl font-bold mb-5'>AUTOMATION</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "Automation").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-
-        {/* UI/UX */}
-        <div className={`${active === "UI/UX" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-          <h1 className='text-xl font-bold mb-5'>UI/UX</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "UI/UX").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-      
-      {/* Graphics */}
-      <div className={`${active === "Graphics" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-          <h1 className='text-xl font-bold mb-5'>GRAPHICS</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "Graphics").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-
-        {/* Animation */}
-        <div className={`${active === "Animation" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-           <h1 className='text-xl font-bold mb-5'>ANIMATION</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "Animation").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-
-        {/* Branding */}
-        <div className={`${active === "Branding" || active === "All" ? "block" : "hidden" } py-6 border-b border-gray-800`}>
-          <h1 className='text-xl font-bold mb-5'>BRANDING</h1>
-          <div className='grid grid-cols-4 gap-2'>
-          {
-            work.filter(p => p.cat === "Branding").map((p,index) => (
-            <div key={index} className='space-y-2 border border-gray-600 bg-[#0e1219b8] rounded-lg w-[97%] hover:scale-102 transition-all duration-300'>
-
-               <img src={p.img} alt="" className='w-full h-auto rounded-lg' />
-
-                  <div className='p-3'>
-                    <div>
-                        <h1 className='font-bold'>{p.title}</h1>
-                        <h3 className='text-[16px]'>{p.subTitle}</h3>
-                    </div>
-                    <p className='text-gray-600 text-sm my-1'>{p.content}</p>
-
-                    <div>
-                        <div>
-                            {p.button}
-                        </div>
-
-                        <button className={`${p.style} font-semibold my-1`}>Explore →</button>
-                    </div>
-                </div>
-             </div>))}
-             </div>
-        </div>
-      
-      
-
+      {visibleCategories.map((cat) => {
+        const items = projects.filter((p) => p.category === cat)
+        if (items.length === 0) return null
+        return (
+          <div key={cat} className="py-6 border-b border-gray-800">
+            <h1 className='text-xl font-bold mb-5'>{cat.toUpperCase()}</h1>
+            <div className='grid grid-cols-4 gap-2'>
+              {items.map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
+            </div>
+          </div>
+        )
+      })}
     </div>
-      
+
     </div>
   )
 }
