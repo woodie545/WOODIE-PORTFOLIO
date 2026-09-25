@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { filter } from '../mapings'
 import { projects } from '../../data/projects'
+import { designPieces } from '../../data/designPieces'
+import DesignPieceCard from '../blocks/DesignPieceCard'
+import DesignLightbox from '../blocks/DesignLightbox'
 
 function ProjectCard({ project }) {
   return (
@@ -34,6 +37,7 @@ function ProjectCard({ project }) {
 
 export default function Work() {
   const [active, setActive] = useState('All')
+  const [lightboxPiece, setLightboxPiece] = useState(null)
 
   const categories = filter.filter((cat) => cat !== 'All')
   const visibleCategories = active === 'All' ? categories : [active]
@@ -104,7 +108,8 @@ export default function Work() {
     <div>
       {visibleCategories.map((cat) => {
         const items = projects.filter((p) => p.category === cat)
-        if (items.length === 0) return null
+        const pieces = designPieces.filter((d) => d.category === cat)
+        if (items.length === 0 && pieces.length === 0) return null
         return (
           <div key={cat} className="py-6 border-b border-gray-800">
             <h1 className='text-xl font-bold mb-5'>{cat.toUpperCase()}</h1>
@@ -112,11 +117,22 @@ export default function Work() {
               {items.map((p) => (
                 <ProjectCard key={p.slug} project={p} />
               ))}
+              {pieces.map((d) => (
+                <DesignPieceCard key={d.id} piece={d} onOpen={setLightboxPiece} />
+              ))}
             </div>
           </div>
         )
       })}
     </div>
+
+    {lightboxPiece && (
+      <DesignLightbox
+        key={lightboxPiece.id}
+        piece={lightboxPiece}
+        onClose={() => setLightboxPiece(null)}
+      />
+    )}
 
     </div>
   )
